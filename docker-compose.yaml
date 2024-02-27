@@ -20,8 +20,7 @@ services:
       - quotes-server
     build: ./quotes-client # path to client Dockerfile
     command: >
-      sh -c "
-      while ! nc -z quotes-server 8080; do
+      /bin/sh -c "while ! nc -z quotes-server 8080; do
         echo 'Waiting for the quotes-server to come online...'
         sleep 1
       done
