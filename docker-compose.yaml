@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  quotes-server:
+    build: ./quotes-server # path to server Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./quotes-server/quotes.json:/app/quotes.json # Volume for quotes.json file
+    command: >
+      sh -c "go run main.go
+      -leadingZerosUpdateInterval 1
+      -port 8080
+      -quotesJsonPath /app/quotes.json
+      -requestsThreshold 1
+      -timeFrame 20"
+    depends_on:
+      - quotes-client
+
+  quotes-client:
+    depends_on:
+      - quotes-server
+    build: ./quotes-client # path to client Dockerfile
+    command: >
+      sh -c "go run main.go
+      -baseUrl http://quotes-server:8080"
