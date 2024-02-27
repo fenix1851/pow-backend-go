@@ -14,8 +14,6 @@ services:
       -quotesJsonPath /app/quotes.json
       -requestsThreshold 1
       -timeFrame 20"
-    depends_on:
-      - quotes-client
 
   quotes-client:
     depends_on:
