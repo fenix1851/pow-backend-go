@@ -20,4 +20,4 @@ services:
       - quotes-server
     build: ./quotes-client # path to client Dockerfile
     command: >
-      /bin/sh -c "startWithDelayInDocker.sh"
+      /bin/sh -c "./startWithDelayInDocker.sh"
